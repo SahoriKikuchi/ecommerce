@@ -1,21 +1,22 @@
 <?php 
 
-require_once("vendor/autoload.php");
+require_once("vendor/autoload.php"); //traz as dependencias do projeto
 
-$app = new \Slim\Slim();
+use \Slim\Slim; //Namespaces
+use \Hcode\Page; //Namespaces
+
+$app = new Slim(); 
 
 $app->config('debug', true);
 
 $app->get('/', function() {
     
-	$sql = new Hcode\DB\Sql();
+	$page = new Page();
 
-	$results = $sql->select("SELECT * FROM tb_users");
-
-	echo json_encode($results);
+	$page->setTpl("index"); //carrega o conteudo que ta dentro do template index
 
 });
 
-$app->run();
+$app->run(); // o que faz rodar mesmo
 
  ?>
